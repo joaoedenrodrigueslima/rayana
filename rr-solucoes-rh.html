@@ -1,0 +1,818 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>RR Soluções RH — Consultoria de Recursos Humanos</title>
+  <link rel="preconnect" href="https://fonts.googleapis.com" />
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+  <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;500;600;700;800&display=swap" rel="stylesheet" />
+  <style>
+    /* ── Tokens ─────────────────────────────────────────── */
+    :root {
+      --color-primary:   #6c0647;
+      --color-primary-light: #8b0a5c;
+      --color-primary-dark:  #4a0430;
+      --color-bg:        #f0efea;
+      --color-bg-card:   #e8e6df;
+      --color-fg:        #000000;
+      --color-muted:     #555555;
+      --color-border:    rgba(108,6,71,.15);
+      --font:            'Poppins', sans-serif;
+      --radius:          12px;
+      --radius-lg:       20px;
+      --transition:      200ms ease;
+    }
+
+    /* ── Reset ───────────────────────────────────────────── */
+    *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
+    html { scroll-behavior: smooth; }
+    body {
+      font-family: var(--font);
+      background: var(--color-bg);
+      color: var(--color-fg);
+      line-height: 1.6;
+      overflow-x: hidden;
+    }
+    img { max-width: 100%; display: block; }
+    a { color: inherit; text-decoration: none; }
+
+    /* ── Utility ─────────────────────────────────────────── */
+    .highlight { color: var(--color-primary); font-weight: 700; }
+    .container { width: 100%; max-width: 1180px; margin: 0 auto; padding: 0 24px; }
+
+    /* ── NAVBAR ──────────────────────────────────────────── */
+    nav {
+      position: sticky; top: 0; z-index: 100;
+      background: rgba(240,239,234,.92);
+      backdrop-filter: blur(12px);
+      -webkit-backdrop-filter: blur(12px);
+      border-bottom: 1px solid var(--color-border);
+    }
+    .nav-inner {
+      display: flex; align-items: center; justify-content: space-between;
+      height: 72px;
+    }
+    .nav-logo { height: 52px; width: auto; object-fit: contain; }
+    .nav-links {
+      display: flex; gap: 32px; list-style: none;
+    }
+    .nav-links a {
+      font-size: 14px; font-weight: 500; color: var(--color-muted);
+      transition: color var(--transition);
+    }
+    .nav-links a:hover { color: var(--color-primary); }
+    .nav-cta {
+      background: var(--color-primary);
+      color: #fff !important;
+      padding: 10px 22px;
+      border-radius: 50px;
+      font-weight: 600 !important;
+      font-size: 14px !important;
+      transition: background var(--transition), box-shadow var(--transition) !important;
+    }
+    .nav-cta:hover {
+      background: var(--color-primary-light) !important;
+      box-shadow: 0 4px 18px rgba(108,6,71,.3) !important;
+    }
+    .nav-hamburger {
+      display: none; flex-direction: column; gap: 5px; cursor: pointer;
+      background: none; border: none; padding: 4px;
+    }
+    .nav-hamburger span {
+      display: block; width: 24px; height: 2px;
+      background: var(--color-fg); border-radius: 2px;
+      transition: var(--transition);
+    }
+
+    /* ── HERO ────────────────────────────────────────────── */
+    .hero {
+      padding: 96px 0 80px;
+      position: relative;
+      overflow: hidden;
+    }
+    .hero::before {
+      content: '';
+      position: absolute; inset: 0;
+      background:
+        radial-gradient(ellipse 60% 50% at 80% 40%, rgba(108,6,71,.08) 0%, transparent 70%),
+        radial-gradient(ellipse 40% 60% at 10% 80%, rgba(108,6,71,.05) 0%, transparent 70%);
+      pointer-events: none;
+    }
+    .hero-grid {
+      display: grid;
+      grid-template-columns: 1fr 1fr;
+      gap: 64px;
+      align-items: center;
+    }
+    .hero-eyebrow {
+      display: inline-flex; align-items: center; gap: 8px;
+      background: rgba(108,6,71,.08);
+      border: 1px solid rgba(108,6,71,.2);
+      border-radius: 50px;
+      padding: 6px 16px;
+      font-size: 12px; font-weight: 600; letter-spacing: .06em;
+      text-transform: uppercase; color: var(--color-primary);
+      margin-bottom: 24px;
+    }
+    .hero-eyebrow svg { flex-shrink: 0; }
+    h1 {
+      font-size: clamp(32px, 5vw, 52px);
+      font-weight: 800; line-height: 1.1;
+      letter-spacing: -.02em;
+      margin-bottom: 24px;
+    }
+    .hero-desc {
+      font-size: 17px; color: var(--color-muted);
+      line-height: 1.75; margin-bottom: 40px;
+    }
+    .hero-actions { display: flex; gap: 14px; flex-wrap: wrap; }
+    .btn {
+      display: inline-flex; align-items: center; gap: 8px;
+      padding: 14px 28px; border-radius: 50px;
+      font-family: var(--font); font-size: 15px; font-weight: 600;
+      cursor: pointer; border: none; transition: all var(--transition);
+    }
+    .btn-primary {
+      background: var(--color-primary); color: #fff;
+      box-shadow: 0 4px 16px rgba(108,6,71,.25);
+    }
+    .btn-primary:hover {
+      background: var(--color-primary-light);
+      box-shadow: 0 6px 24px rgba(108,6,71,.4);
+      transform: translateY(-1px);
+    }
+    .btn-ghost {
+      background: transparent; color: var(--color-primary);
+      border: 2px solid var(--color-primary);
+    }
+    .btn-ghost:hover {
+      background: rgba(108,6,71,.06);
+      transform: translateY(-1px);
+    }
+
+    /* Hero visual ──── */
+    .hero-visual {
+      position: relative;
+    }
+    .hero-card-main {
+      background: linear-gradient(135deg, var(--color-primary) 0%, #9c0860 100%);
+      border-radius: var(--radius-lg);
+      padding: 40px 36px;
+      color: #fff;
+      box-shadow: 0 20px 60px rgba(108,6,71,.3);
+    }
+    .hero-card-main h3 {
+      font-size: 14px; font-weight: 500; opacity: .75;
+      text-transform: uppercase; letter-spacing: .08em; margin-bottom: 8px;
+    }
+    .hero-card-main p {
+      font-size: 28px; font-weight: 700; line-height: 1.2; margin-bottom: 28px;
+    }
+    .hero-stats {
+      display: grid; grid-template-columns: 1fr 1fr;
+      gap: 16px;
+    }
+    .stat-item {
+      background: rgba(255,255,255,.12);
+      border-radius: var(--radius);
+      padding: 16px;
+      backdrop-filter: blur(8px);
+    }
+    .stat-item .stat-num {
+      font-size: 28px; font-weight: 800; line-height: 1;
+    }
+    .stat-item .stat-label {
+      font-size: 12px; opacity: .75; margin-top: 4px;
+    }
+    .hero-badge {
+      position: absolute;
+      bottom: -20px; left: -24px;
+      background: var(--color-bg);
+      border: 1px solid var(--color-border);
+      border-radius: var(--radius);
+      padding: 14px 18px;
+      display: flex; align-items: center; gap: 12px;
+      box-shadow: 0 8px 30px rgba(0,0,0,.08);
+      min-width: 200px;
+    }
+    .hero-badge-icon {
+      width: 40px; height: 40px; border-radius: 10px;
+      background: rgba(108,6,71,.1);
+      display: grid; place-items: center; flex-shrink: 0;
+    }
+    .hero-badge-text { font-size: 12px; font-weight: 600; }
+    .hero-badge-sub { font-size: 11px; color: var(--color-muted); }
+
+    /* ── STRIP ───────────────────────────────────────────── */
+    .strip {
+      background: var(--color-primary);
+      padding: 18px 0; overflow: hidden;
+    }
+    .strip-track {
+      display: flex; gap: 48px; align-items: center;
+      white-space: nowrap;
+      animation: marquee 22s linear infinite;
+    }
+    .strip-item {
+      display: flex; align-items: center; gap: 10px;
+      color: rgba(255,255,255,.85); font-size: 13px; font-weight: 500;
+      flex-shrink: 0;
+    }
+    .strip-dot { width: 5px; height: 5px; border-radius: 50%; background: rgba(255,255,255,.4); }
+    @keyframes marquee {
+      from { transform: translateX(0); }
+      to   { transform: translateX(-50%); }
+    }
+
+    /* ── ABOUT ───────────────────────────────────────────── */
+    .about { padding: 96px 0; }
+    .section-label {
+      font-size: 12px; font-weight: 600; letter-spacing: .1em;
+      text-transform: uppercase; color: var(--color-primary);
+      margin-bottom: 12px;
+    }
+    h2 {
+      font-size: clamp(26px, 4vw, 40px);
+      font-weight: 700; line-height: 1.2;
+      letter-spacing: -.015em;
+      margin-bottom: 20px;
+    }
+    .about-grid {
+      display: grid; grid-template-columns: 1fr 1fr;
+      gap: 80px; align-items: center;
+    }
+    .about-text p {
+      font-size: 16px; color: var(--color-muted);
+      line-height: 1.8; margin-bottom: 16px;
+    }
+    .about-text p:last-child { margin-bottom: 0; }
+    .about-visual {
+      display: grid; grid-template-columns: 1fr 1fr; gap: 14px;
+    }
+    .about-card {
+      background: var(--color-bg-card);
+      border: 1px solid var(--color-border);
+      border-radius: var(--radius);
+      padding: 24px;
+      transition: border-color var(--transition), box-shadow var(--transition), transform var(--transition);
+    }
+    .about-card:hover {
+      border-color: var(--color-primary);
+      box-shadow: 0 4px 20px rgba(108,6,71,.12);
+      transform: translateY(-3px);
+    }
+    .about-card:first-child {
+      grid-column: span 2;
+      display: flex; gap: 20px; align-items: flex-start;
+    }
+    .card-icon {
+      width: 48px; height: 48px; border-radius: 12px;
+      background: rgba(108,6,71,.1);
+      display: grid; place-items: center; flex-shrink: 0;
+    }
+    .about-card h4 { font-size: 16px; font-weight: 600; margin-bottom: 6px; }
+    .about-card p { font-size: 14px; color: var(--color-muted); line-height: 1.6; }
+
+    /* ── SERVICES ────────────────────────────────────────── */
+    .services { padding: 96px 0; background: var(--color-bg-card); }
+    .services-head { text-align: center; margin-bottom: 56px; }
+    .services-head p {
+      font-size: 17px; color: var(--color-muted);
+      max-width: 540px; margin: 0 auto; line-height: 1.7;
+    }
+    .services-grid {
+      display: grid;
+      grid-template-columns: repeat(auto-fit, minmax(260px, 1fr));
+      gap: 20px;
+    }
+    .service-card {
+      background: var(--color-bg);
+      border: 1px solid var(--color-border);
+      border-radius: var(--radius-lg);
+      padding: 32px 28px;
+      transition: all var(--transition);
+      position: relative; overflow: hidden;
+    }
+    .service-card::before {
+      content: '';
+      position: absolute; top: 0; left: 0; right: 0;
+      height: 3px;
+      background: linear-gradient(90deg, var(--color-primary), var(--color-primary-light));
+      opacity: 0; transition: opacity var(--transition);
+    }
+    .service-card:hover::before { opacity: 1; }
+    .service-card:hover {
+      box-shadow: 0 8px 32px rgba(108,6,71,.12);
+      transform: translateY(-4px);
+    }
+    .service-icon {
+      width: 52px; height: 52px; border-radius: 14px;
+      background: rgba(108,6,71,.08);
+      display: grid; place-items: center;
+      margin-bottom: 20px;
+    }
+    .service-card h3 {
+      font-size: 18px; font-weight: 700; margin-bottom: 10px;
+    }
+    .service-card p {
+      font-size: 14px; color: var(--color-muted); line-height: 1.7;
+    }
+
+    /* ── DIFFERENTIALS ───────────────────────────────────── */
+    .differentials { padding: 96px 0; }
+    .diff-grid {
+      display: grid; grid-template-columns: 5fr 7fr;
+      gap: 80px; align-items: center;
+    }
+    .diff-list { display: flex; flex-direction: column; gap: 16px; }
+    .diff-item {
+      display: flex; align-items: flex-start; gap: 16px;
+      background: var(--color-bg-card);
+      border: 1px solid var(--color-border);
+      border-radius: var(--radius);
+      padding: 20px; cursor: default;
+      transition: all var(--transition);
+    }
+    .diff-item:hover {
+      border-color: var(--color-primary);
+      box-shadow: 0 4px 18px rgba(108,6,71,.1);
+    }
+    .diff-check {
+      width: 32px; height: 32px; border-radius: 8px;
+      background: rgba(108,6,71,.1);
+      display: grid; place-items: center; flex-shrink: 0; margin-top: 2px;
+    }
+    .diff-item h4 { font-size: 15px; font-weight: 600; margin-bottom: 4px; }
+    .diff-item p  { font-size: 13px; color: var(--color-muted); line-height: 1.6; }
+    .diff-quote {
+      background: linear-gradient(135deg, var(--color-primary) 0%, #9c0860 100%);
+      border-radius: var(--radius-lg);
+      padding: 48px 40px;
+      color: #fff;
+    }
+    .diff-quote blockquote {
+      font-size: 22px; font-weight: 600; line-height: 1.5;
+      font-style: italic; margin-bottom: 32px;
+    }
+    .diff-quote blockquote::before {
+      content: '"';
+      font-size: 72px; font-weight: 800; line-height: 0.5;
+      display: block; margin-bottom: 16px; opacity: .4;
+    }
+    .diff-quote-author { display: flex; align-items: center; gap: 14px; }
+    .diff-quote-avatar {
+      width: 52px; height: 52px; border-radius: 50%;
+      background: rgba(255,255,255,.2);
+      display: grid; place-items: center;
+      font-size: 22px; font-weight: 700;
+    }
+    .diff-quote-name { font-size: 15px; font-weight: 700; }
+    .diff-quote-role { font-size: 13px; opacity: .75; margin-top: 2px; }
+
+    /* ── CONTACT ─────────────────────────────────────────── */
+    .contact { padding: 96px 0; background: var(--color-bg-card); }
+    .contact-head { text-align: center; margin-bottom: 56px; }
+    .contact-head p {
+      font-size: 17px; color: var(--color-muted);
+      max-width: 500px; margin: 8px auto 0;
+    }
+    .contact-info {
+      display: flex; flex-direction: row; gap: 24px;
+      justify-content: center; flex-wrap: wrap;
+    }
+    .contact-item { flex: 1; min-width: 260px; max-width: 380px; }
+    .contact-item {
+      display: flex; align-items: flex-start; gap: 16px;
+      background: var(--color-bg);
+      border: 1px solid var(--color-border);
+      border-radius: var(--radius);
+      padding: 20px 22px;
+      transition: all var(--transition);
+    }
+    .contact-item:hover {
+      border-color: var(--color-primary);
+      box-shadow: 0 4px 18px rgba(108,6,71,.1);
+    }
+    .contact-item a { color: var(--color-fg); }
+    .contact-item-icon {
+      width: 44px; height: 44px; border-radius: 10px;
+      background: rgba(108,6,71,.08);
+      display: grid; place-items: center; flex-shrink: 0;
+    }
+    .contact-item-label {
+      font-size: 12px; font-weight: 600; text-transform: uppercase;
+      letter-spacing: .08em; color: var(--color-primary); margin-bottom: 4px;
+    }
+    .contact-item-value { font-size: 16px; font-weight: 600; }
+
+
+    /* ── FOOTER ──────────────────────────────────────────── */
+    footer {
+      background: var(--color-primary-dark);
+      color: rgba(255,255,255,.85);
+      padding: 48px 0 32px;
+    }
+    .footer-inner {
+      display: flex; flex-wrap: wrap;
+      justify-content: space-between; align-items: flex-start;
+      gap: 32px; margin-bottom: 32px;
+    }
+    .footer-brand img { height: 44px; filter: brightness(0) invert(1); margin-bottom: 12px; }
+    .footer-brand p {
+      font-size: 13px; opacity: .6; max-width: 240px; line-height: 1.6;
+    }
+    .footer-col h5 {
+      font-size: 13px; font-weight: 600;
+      text-transform: uppercase; letter-spacing: .08em;
+      margin-bottom: 14px; opacity: .5;
+    }
+    .footer-col ul { list-style: none; display: flex; flex-direction: column; gap: 8px; }
+    .footer-col ul li a {
+      font-size: 14px; opacity: .75;
+      transition: opacity var(--transition);
+    }
+    .footer-col ul li a:hover { opacity: 1; }
+    .footer-bottom {
+      border-top: 1px solid rgba(255,255,255,.1);
+      padding-top: 24px; font-size: 13px;
+      display: flex; justify-content: space-between;
+      flex-wrap: wrap; gap: 8px; opacity: .5;
+    }
+
+    /* ── MOBILE NAV ──────────────────────────────────────── */
+    .mobile-menu {
+      display: none;
+      position: fixed; inset: 0; z-index: 200;
+      background: var(--color-bg);
+      flex-direction: column; justify-content: center; align-items: center;
+      gap: 32px;
+    }
+    .mobile-menu.open { display: flex; }
+    .mobile-menu a {
+      font-size: 22px; font-weight: 600; color: var(--color-fg);
+    }
+    .mobile-close {
+      position: absolute; top: 24px; right: 24px;
+      background: none; border: none; cursor: pointer;
+      font-size: 28px; color: var(--color-fg);
+    }
+
+    /* ── RESPONSIVE ──────────────────────────────────────── */
+    @media (max-width: 900px) {
+      .hero-grid, .about-grid, .diff-grid, .contact-grid { grid-template-columns: 1fr; gap: 40px; }
+      .hero-visual { order: -1; }
+      .hero-badge { bottom: -10px; left: 0; }
+      .about-visual { grid-template-columns: 1fr 1fr; }
+      .about-card:first-child { grid-column: span 2; }
+      .diff-quote { order: -1; }
+    }
+    @media (max-width: 640px) {
+      .nav-links { display: none; }
+      .nav-hamburger { display: flex; }
+      .hero { padding: 64px 0 56px; }
+      .about, .services, .differentials, .contact { padding: 64px 0; }
+      .about-visual { grid-template-columns: 1fr; }
+      .about-card:first-child { grid-column: span 1; flex-direction: column; }
+      .form-row { grid-template-columns: 1fr; }
+      .hero-stats { grid-template-columns: 1fr 1fr; }
+      .footer-inner { flex-direction: column; }
+    }
+  </style>
+</head>
+<body>
+
+  <!-- ── NAV ──────────────────────────────────────────────── -->
+  <nav>
+    <div class="container nav-inner">
+      <img src="https://i.imgur.com/t7O08tn.png" alt="RR Soluções RH" class="nav-logo" />
+      <ul class="nav-links">
+        <li><a href="#sobre">Sobre</a></li>
+        <li><a href="#servicos">Serviços</a></li>
+        <li><a href="#diferenciais">Diferenciais</a></li>
+        <li><a href="#contato" class="nav-cta">Fale Conosco</a></li>
+      </ul>
+      <button class="nav-hamburger" aria-label="Abrir menu" onclick="document.querySelector('.mobile-menu').classList.add('open')">
+        <span></span><span></span><span></span>
+      </button>
+    </div>
+  </nav>
+
+  <!-- Mobile Menu -->
+  <div class="mobile-menu" role="dialog" aria-label="Menu de navegação">
+    <button class="mobile-close" aria-label="Fechar menu" onclick="this.parentElement.classList.remove('open')">✕</button>
+    <a href="#sobre"        onclick="this.closest('.mobile-menu').classList.remove('open')">Sobre</a>
+    <a href="#servicos"     onclick="this.closest('.mobile-menu').classList.remove('open')">Serviços</a>
+    <a href="#diferenciais" onclick="this.closest('.mobile-menu').classList.remove('open')">Diferenciais</a>
+    <a href="#contato"      onclick="this.closest('.mobile-menu').classList.remove('open')">Fale Conosco</a>
+  </div>
+
+  <!-- ── HERO ─────────────────────────────────────────────── -->
+  <section class="hero" id="inicio">
+    <div class="container">
+      <div class="hero-grid">
+        <div class="hero-content">
+          <div class="hero-eyebrow">
+            <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5"><path d="M12 2l2.4 7.4H22l-6.2 4.5 2.4 7.4L12 17l-6.2 4.3 2.4-7.4L2 9.4h7.6z"/></svg>
+            Consultoria Especializada em RH
+          </div>
+          <h1>
+            Conectamos <span class="highlight">talentos</span> a empresas que crescem
+          </h1>
+          <p class="hero-desc">
+            Desde 2022, atuamos com recrutamento e seleção especializado, hunting estratégico e assessment — com um olhar humano que faz a diferença em cada processo.
+          </p>
+          <div class="hero-actions">
+            <a href="#contato" class="btn btn-primary">
+              <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5"><path d="M22 16.92v3a2 2 0 01-2.18 2 19.79 19.79 0 01-8.63-3.07 19.5 19.5 0 01-6-6 19.79 19.79 0 01-3.07-8.67A2 2 0 014.11 2h3a2 2 0 012 1.72c.127.96.361 1.903.7 2.81a2 2 0 01-.45 2.11L8.09 9.91a16 16 0 006 6l1.27-1.27a2 2 0 012.11-.45c.907.339 1.85.573 2.81.7A2 2 0 0122 16.92z"/></svg>
+              Falar com especialista
+            </a>
+            <a href="#servicos" class="btn btn-ghost">
+              Ver serviços
+              <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5"><path d="M5 12h14M12 5l7 7-7 7"/></svg>
+            </a>
+          </div>
+        </div>
+
+        <div class="hero-visual">
+          <div class="hero-card-main">
+            <h3>Nossa missão</h3>
+            <p>Equipes de alto desempenho para organizações em crescimento</p>
+            <div class="hero-stats">
+              <div class="stat-item">
+                <div class="stat-num">2022</div>
+                <div class="stat-label">Fundação</div>
+              </div>
+              <div class="stat-item">
+                <div class="stat-num">+Tech</div>
+                <div class="stat-label">Foco em tecnologia</div>
+              </div>
+              <div class="stat-item">
+                <div class="stat-num">360°</div>
+                <div class="stat-label">Op. ao estratégico</div>
+              </div>
+              <div class="stat-item">
+                <div class="stat-num">Ágil</div>
+                <div class="stat-label">Processos assertivos</div>
+              </div>
+            </div>
+          </div>
+          <div class="hero-badge">
+            <div class="hero-badge-icon">
+              <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="#6c0647" stroke-width="2.5"><path d="M17 21v-2a4 4 0 00-4-4H5a4 4 0 00-4 4v2"/><circle cx="9" cy="7" r="4"/><path d="M23 21v-2a4 4 0 00-3-3.87"/><path d="M16 3.13a4 4 0 010 7.75"/></svg>
+            </div>
+            <div>
+              <div class="hero-badge-text">Parceiro estratégico</div>
+              <div class="hero-badge-sub">do recrutamento à gestão</div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- ── STRIP ─────────────────────────────────────────────── -->
+  <div class="strip" aria-hidden="true">
+    <div class="strip-track">
+      <span class="strip-item"><span>Recrutamento &amp; Seleção</span></span>
+      <span class="strip-dot"></span>
+      <span class="strip-item"><span>Tech Hiring</span></span>
+      <span class="strip-dot"></span>
+      <span class="strip-item"><span>Hunting Estratégico</span></span>
+      <span class="strip-dot"></span>
+      <span class="strip-item"><span>Assessment</span></span>
+      <span class="strip-dot"></span>
+      <span class="strip-item"><span>Consultoria de RH</span></span>
+      <span class="strip-dot"></span>
+      <span class="strip-item"><span>Atuação Ágil</span></span>
+      <span class="strip-dot"></span>
+      <!-- Duplicate for infinite scroll -->
+      <span class="strip-item"><span>Recrutamento &amp; Seleção</span></span>
+      <span class="strip-dot"></span>
+      <span class="strip-item"><span>Tech Hiring</span></span>
+      <span class="strip-dot"></span>
+      <span class="strip-item"><span>Hunting Estratégico</span></span>
+      <span class="strip-dot"></span>
+      <span class="strip-item"><span>Assessment</span></span>
+      <span class="strip-dot"></span>
+      <span class="strip-item"><span>Consultoria de RH</span></span>
+      <span class="strip-dot"></span>
+      <span class="strip-item"><span>Atuação Ágil</span></span>
+      <span class="strip-dot"></span>
+    </div>
+  </div>
+
+  <!-- ── SOBRE ─────────────────────────────────────────────── -->
+  <section class="about" id="sobre">
+    <div class="container">
+      <div class="about-grid">
+        <div class="about-text">
+          <div class="section-label">Sobre nós</div>
+          <h2>Quem conecta <span class="highlight">pessoas</span> a propósito</h2>
+          <p>Fundada em 2022, nossa consultoria é especializada em recrutamento e seleção de talentos, com atuação em diversos segmentos e forte expertise na área de tecnologia.</p>
+          <p>Desde o início, temos como missão conectar empresas a profissionais alinhados com suas culturas, objetivos e desafios estratégicos.</p>
+          <p>Atuamos como <strong>parceiros estratégicos</strong> dos nossos clientes, ajudando a construir equipes de alto desempenho que impulsionam o crescimento sustentável das organizações.</p>
+        </div>
+        <div class="about-visual">
+          <div class="about-card">
+            <div class="card-icon">
+              <svg width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="#6c0647" stroke-width="2"><path d="M12 22s8-4 8-10V5l-8-3-8 3v7c0 6 8 10 8 10z"/></svg>
+            </div>
+            <div>
+              <h4>Missão</h4>
+              <p>Conectar empresas a profissionais alinhados com suas culturas e objetivos estratégicos.</p>
+            </div>
+          </div>
+          <div class="about-card">
+            <div class="card-icon">
+              <svg width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="#6c0647" stroke-width="2"><circle cx="12" cy="12" r="10"/><line x1="12" y1="8" x2="12" y2="12"/><line x1="12" y1="16" x2="12.01" y2="16"/></svg>
+            </div>
+            <h4>Visão</h4>
+            <p>Ser referência em consultoria de RH ágil, humanizada e orientada por dados.</p>
+          </div>
+          <div class="about-card">
+            <div class="card-icon">
+              <svg width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="#6c0647" stroke-width="2"><path d="M20.84 4.61a5.5 5.5 0 00-7.78 0L12 5.67l-1.06-1.06a5.5 5.5 0 00-7.78 7.78l1.06 1.06L12 21.23l7.78-7.78 1.06-1.06a5.5 5.5 0 000-7.78z"/></svg>
+            </div>
+            <h4>Valores</h4>
+            <p>Personalização, agilidade e olhar humano em cada processo seletivo.</p>
+          </div>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- ── SERVIÇOS ───────────────────────────────────────────── -->
+  <section class="services" id="servicos">
+    <div class="container">
+      <div class="services-head">
+        <div class="section-label">O que fazemos</div>
+        <h2>Serviços especializados em <span class="highlight">RH</span></h2>
+        <p>Combinamos tecnologia, inteligência de mercado e um olhar humano para entregar processos seletivos assertivos.</p>
+      </div>
+      <div class="services-grid">
+        <div class="service-card">
+          <div class="service-icon">
+            <svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="#6c0647" stroke-width="2"><path d="M17 21v-2a4 4 0 00-4-4H5a4 4 0 00-4 4v2"/><circle cx="9" cy="7" r="4"/><path d="M23 21v-2a4 4 0 00-3-3.87"/><path d="M16 3.13a4 4 0 010 7.75"/></svg>
+          </div>
+          <h3>Recrutamento &amp; Seleção</h3>
+          <p>Processos seletivos especializados para perfis Tech, Administrativo, Comercial e outros segmentos, do nível operacional ao estratégico.</p>
+        </div>
+        <div class="service-card">
+          <div class="service-icon">
+            <svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="#6c0647" stroke-width="2"><circle cx="11" cy="11" r="8"/><path d="M21 21l-4.35-4.35"/></svg>
+          </div>
+          <h3>Hunting Estratégico</h3>
+          <p>Identificação e atração ativa de profissionais qualificados para posições estratégicas que exigem expertise específica de mercado.</p>
+        </div>
+        <div class="service-card">
+          <div class="service-icon">
+            <svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="#6c0647" stroke-width="2"><path d="M9 11l3 3L22 4"/><path d="M21 12v7a2 2 0 01-2 2H5a2 2 0 01-2-2V5a2 2 0 012-2h11"/></svg>
+          </div>
+          <h3>Assessment</h3>
+          <p>Avaliações comportamentais e técnicas que apoiam decisões de contratação e desenvolvimento com dados confiáveis.</p>
+        </div>
+        <div class="service-card">
+          <div class="service-icon">
+            <svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="#6c0647" stroke-width="2"><path d="M2 3h6a4 4 0 014 4v14a3 3 0 00-3-3H2z"/><path d="M22 3h-6a4 4 0 00-4 4v14a3 3 0 013-3h7z"/></svg>
+          </div>
+          <h3>Consultoria de Processos</h3>
+          <p>Estruturação e otimização de processos seletivos internos, com metodologias modernas que reduzem tempo e aumentam assertividade.</p>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- ── DIFERENCIAIS ───────────────────────────────────────── -->
+  <section class="differentials" id="diferenciais">
+    <div class="container">
+      <div class="diff-grid">
+        <div>
+          <div class="section-label">Nosso diferencial</div>
+          <h2 style="margin-bottom: 32px;">Por que escolher a <span class="highlight">RR Soluções</span>?</h2>
+          <div class="diff-list">
+            <div class="diff-item">
+              <div class="diff-check">
+                <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="#6c0647" stroke-width="2.5"><path d="M20 6L9 17l-5-5"/></svg>
+              </div>
+              <div>
+                <h4>Atuação Personalizada</h4>
+                <p>Cada cliente recebe atenção exclusiva, com estratégias desenhadas para sua realidade e cultura organizacional.</p>
+              </div>
+            </div>
+            <div class="diff-item">
+              <div class="diff-check">
+                <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="#6c0647" stroke-width="2.5"><path d="M20 6L9 17l-5-5"/></svg>
+              </div>
+              <div>
+                <h4>Expertise em Tecnologia</h4>
+                <p>Profundo conhecimento do mercado tech permite identificar e avaliar talentos com precisão técnica e cultural.</p>
+              </div>
+            </div>
+            <div class="diff-item">
+              <div class="diff-check">
+                <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="#6c0647" stroke-width="2.5"><path d="M20 6L9 17l-5-5"/></svg>
+              </div>
+              <div>
+                <h4>Inteligência de Mercado</h4>
+                <p>Utilizamos dados e benchmarking para embasar decisões e garantir atratividade nos processos seletivos.</p>
+              </div>
+            </div>
+            <div class="diff-item">
+              <div class="diff-check">
+                <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="#6c0647" stroke-width="2.5"><path d="M20 6L9 17l-5-5"/></svg>
+              </div>
+              <div>
+                <h4>Processos Ágeis e Assertivos</h4>
+                <p>Metodologia eficiente que reduz o tempo de contratação sem abrir mão da qualidade e da aderência cultural.</p>
+              </div>
+            </div>
+          </div>
+        </div>
+        <div class="diff-quote">
+          <blockquote>
+            Nosso diferencial está na atuação personalizada e ágil, combinando tecnologia, inteligência de mercado e um olhar humano para entregar processos seletivos assertivos.
+          </blockquote>
+          <div class="diff-quote-author">
+            <div class="diff-quote-avatar">RR</div>
+            <div>
+              <div class="diff-quote-name">RR Soluções RH</div>
+              <div class="diff-quote-role">Consultoria de Recursos Humanos · Desde 2022</div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- ── CONTATO ────────────────────────────────────────────── -->
+  <section class="contact" id="contato">
+    <div class="container">
+      <div class="contact-head">
+        <div class="section-label">Contato</div>
+        <h2>Vamos <span class="highlight">conversar</span>?</h2>
+        <p>Entre em contato e descubra como podemos ajudar a construir o time ideal para o seu negócio.</p>
+      </div>
+      <div class="contact-info">
+        <div class="contact-item">
+          <div class="contact-item-icon">
+            <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="#6c0647" stroke-width="2.5"><path d="M22 16.92v3a2 2 0 01-2.18 2 19.79 19.79 0 01-8.63-3.07 19.5 19.5 0 01-6-6 19.79 19.79 0 01-3.07-8.67A2 2 0 014.11 2h3a2 2 0 012 1.72c.127.96.361 1.903.7 2.81a2 2 0 01-.45 2.11L8.09 9.91a16 16 0 006 6l1.27-1.27a2 2 0 012.11-.45c.907.339 1.85.573 2.81.7A2 2 0 0122 16.92z"/></svg>
+          </div>
+          <div>
+            <div class="contact-item-label">WhatsApp</div>
+            <div class="contact-item-value">
+              <a href="https://wa.me/5561983221523" target="_blank" rel="noopener">61 98322-1523</a>
+            </div>
+          </div>
+        </div>
+        <div class="contact-item">
+          <div class="contact-item-icon">
+            <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="#6c0647" stroke-width="2.5"><path d="M4 4h16c1.1 0 2 .9 2 2v12c0 1.1-.9 2-2 2H4c-1.1 0-2-.9-2-2V6c0-1.1.9-2 2-2z"/><polyline points="22,6 12,13 2,6"/></svg>
+          </div>
+          <div>
+            <div class="contact-item-label">E-mail</div>
+            <div class="contact-item-value">
+              <a href="mailto:rrsolucoesrh@gmail.com">rrsolucoesrh@gmail.com</a>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- ── FOOTER ─────────────────────────────────────────────── -->
+  <footer>
+    <div class="container">
+      <div class="footer-inner">
+        <div class="footer-brand">
+          <img src="https://i.imgur.com/t7O08tn.png" alt="RR Soluções RH" />
+          <p>Conectando talentos a empresas que constroem o futuro.</p>
+        </div>
+        <div class="footer-col">
+          <h5>Serviços</h5>
+          <ul>
+            <li><a href="#servicos">Recrutamento &amp; Seleção</a></li>
+            <li><a href="#servicos">Hunting Estratégico</a></li>
+            <li><a href="#servicos">Assessment</a></li>
+            <li><a href="#servicos">Consultoria</a></li>
+          </ul>
+        </div>
+        <div class="footer-col">
+          <h5>Contato</h5>
+          <ul>
+            <li><a href="mailto:rrsolucoesrh@gmail.com">rrsolucoesrh@gmail.com</a></li>
+            <li><a href="https://wa.me/5561983221523">61 98322-1523</a></li>
+          </ul>
+        </div>
+      </div>
+      <div class="footer-bottom">
+        <span>© 2025 RR Soluções RH. Todos os direitos reservados.</span>
+        <span>Fundada em 2022 · Brasília, DF</span>
+      </div>
+    </div>
+  </footer>
+
+
+
+</body>
+</html>
