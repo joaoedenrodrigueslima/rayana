@@ -283,14 +283,14 @@
     }
     .services-grid {
       display: grid;
-      grid-template-columns: repeat(auto-fit, minmax(260px, 1fr));
+      grid-template-columns: repeat(5, 1fr);
       gap: 20px;
     }
     .service-card {
       background: var(--color-bg);
       border: 1px solid var(--color-border);
       border-radius: var(--radius-lg);
-      padding: 32px 28px;
+      padding: 32px 24px;
       transition: all var(--transition);
       position: relative; overflow: hidden;
     }
@@ -313,10 +313,10 @@
       margin-bottom: 20px;
     }
     .service-card h3 {
-      font-size: 18px; font-weight: 700; margin-bottom: 10px;
+      font-size: 16px; font-weight: 700; margin-bottom: 10px;
     }
     .service-card p {
-      font-size: 14px; color: var(--color-muted); line-height: 1.7;
+      font-size: 13px; color: var(--color-muted); line-height: 1.6;
     }
 
     /* ── DIFFERENTIALS ───────────────────────────────────── */
@@ -346,30 +346,13 @@
     }
     .diff-item h4 { font-size: 15px; font-weight: 600; margin-bottom: 4px; }
     .diff-item p  { font-size: 13px; color: var(--color-muted); line-height: 1.6; }
-    .diff-quote {
-      background: linear-gradient(135deg, var(--color-primary) 0%, #9c0860 100%);
-      border-radius: var(--radius-lg);
-      padding: 48px 40px;
-      color: #fff;
+
+    /* ── DIVIDER ─────────────────────────────────────────── */
+    .section-divider {
+      border: none;
+      border-top: 1px solid var(--color-border);
+      margin: 0;
     }
-    .diff-quote blockquote {
-      font-size: 22px; font-weight: 600; line-height: 1.5;
-      font-style: italic; margin-bottom: 32px;
-    }
-    .diff-quote blockquote::before {
-      content: '"';
-      font-size: 72px; font-weight: 800; line-height: 0.5;
-      display: block; margin-bottom: 16px; opacity: .4;
-    }
-    .diff-quote-author { display: flex; align-items: center; gap: 14px; }
-    .diff-quote-avatar {
-      width: 52px; height: 52px; border-radius: 50%;
-      background: rgba(255,255,255,.2);
-      display: grid; place-items: center;
-      font-size: 22px; font-weight: 700;
-    }
-    .diff-quote-name { font-size: 15px; font-weight: 700; }
-    .diff-quote-role { font-size: 13px; opacity: .75; margin-top: 2px; }
 
     /* ── CONTACT ─────────────────────────────────────────── */
     .contact { padding: 96px 0; background: var(--color-bg-card); }
@@ -406,7 +389,6 @@
       letter-spacing: .08em; color: var(--color-primary); margin-bottom: 4px;
     }
     .contact-item-value { font-size: 16px; font-weight: 600; }
-
 
     /* ── FOOTER ──────────────────────────────────────────── */
     footer {
@@ -460,13 +442,16 @@
     }
 
     /* ── RESPONSIVE ──────────────────────────────────────── */
+    @media (max-width: 1200px) {
+      .services-grid { grid-template-columns: repeat(auto-fit, minmax(220px, 1fr)); }
+    }
     @media (max-width: 900px) {
       .hero-grid, .about-grid, .diff-grid, .contact-grid { grid-template-columns: 1fr; gap: 40px; }
       .hero-visual { order: -1; }
       .hero-badge { bottom: -10px; left: 0; }
       .about-visual { grid-template-columns: 1fr 1fr; }
       .about-card:first-child { grid-column: span 2; }
-      .diff-quote { order: -1; }
+      .services-grid { grid-template-columns: 1fr; }
     }
     @media (max-width: 640px) {
       .nav-links { display: none; }
@@ -475,7 +460,6 @@
       .about, .services, .differentials, .contact { padding: 64px 0; }
       .about-visual { grid-template-columns: 1fr; }
       .about-card:first-child { grid-column: span 1; flex-direction: column; }
-      .form-row { grid-template-columns: 1fr; }
       .hero-stats { grid-template-columns: 1fr 1fr; }
       .footer-inner { flex-direction: column; }
     }
@@ -483,7 +467,6 @@
 </head>
 <body>
 
-  <!-- ── NAV ──────────────────────────────────────────────── -->
   <nav>
     <div class="container nav-inner">
       <img src="https://i.imgur.com/VVGWtCH.png" alt="RR Soluções RH" class="nav-logo" />
@@ -499,7 +482,6 @@
     </div>
   </nav>
 
-  <!-- Mobile Menu -->
   <div class="mobile-menu" role="dialog" aria-label="Menu de navegação">
     <button class="mobile-close" aria-label="Fechar menu" onclick="this.parentElement.classList.remove('open')">✕</button>
     <a href="#sobre"        onclick="this.closest('.mobile-menu').classList.remove('open')">Sobre</a>
@@ -508,7 +490,6 @@
     <a href="#contato"      onclick="this.closest('.mobile-menu').classList.remove('open')">Fale Conosco</a>
   </div>
 
-  <!-- ── HERO ─────────────────────────────────────────────── -->
   <section class="hero" id="inicio">
     <div class="container">
       <div class="hero-grid">
@@ -572,7 +553,6 @@
     </div>
   </section>
 
-  <!-- ── STRIP ─────────────────────────────────────────────── -->
   <div class="strip" aria-hidden="true">
     <div class="strip-track">
       <span class="strip-item"><span>Recrutamento &amp; Seleção</span></span>
@@ -587,7 +567,6 @@
       <span class="strip-dot"></span>
       <span class="strip-item"><span>Atuação Ágil</span></span>
       <span class="strip-dot"></span>
-      <!-- Duplicate for infinite scroll -->
       <span class="strip-item"><span>Recrutamento &amp; Seleção</span></span>
       <span class="strip-dot"></span>
       <span class="strip-item"><span>Tech Hiring</span></span>
@@ -603,7 +582,6 @@
     </div>
   </div>
 
-  <!-- ── SOBRE ─────────────────────────────────────────────── -->
   <section class="about" id="sobre">
     <div class="container">
       <div class="about-grid">
@@ -621,7 +599,7 @@
             </div>
             <div>
               <h4>Missão</h4>
-              <p>Conectar empresas a profissionais alinhados com suas culturas e objetivos estratégicos.</p>
+              <p>Conectar empresas e talentos de forma estratégica e humanizada, transformando processos seletivos em pontes de crescimento mútuo por meio de metodologias assertivas e respeito às pessoas.</p>
             </div>
           </div>
           <div class="about-card">
@@ -643,7 +621,6 @@
     </div>
   </section>
 
-  <!-- ── SERVIÇOS ───────────────────────────────────────────── -->
   <section class="services" id="servicos">
     <div class="container">
       <div class="services-head">
@@ -657,34 +634,40 @@
             <svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="#6c0647" stroke-width="2"><path d="M17 21v-2a4 4 0 00-4-4H5a4 4 0 00-4 4v2"/><circle cx="9" cy="7" r="4"/><path d="M23 21v-2a4 4 0 00-3-3.87"/><path d="M16 3.13a4 4 0 010 7.75"/></svg>
           </div>
           <h3>Recrutamento &amp; Seleção</h3>
-          <p>Processos seletivos especializados para perfis Tech, Administrativo, Comercial e outros segmentos, do nível operacional ao estratégico.</p>
+          <p>Processos seletivos especializados para perfis Tech, Administrativo e Comercial, do operacional ao estratégico.</p>
+        </div>
+        <div class="service-card">
+          <div class="service-icon">
+            <svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="#6c0647" stroke-width="2"><rect x="2" y="7" width="20" height="14" rx="2" ry="2"/><path d="M16 21V5a2 2 0 0 0-2-2h-4a2 2 0 0 0-2 2v16"/></svg>
+          </div>
+          <h3>RPO</h3>
+          <p>Desempenhamos de forma consultiva e técnica via Recruitment on Demand ou Selective RPO.</p>
         </div>
         <div class="service-card">
           <div class="service-icon">
             <svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="#6c0647" stroke-width="2"><circle cx="11" cy="11" r="8"/><path d="M21 21l-4.35-4.35"/></svg>
           </div>
           <h3>Hunting Estratégico</h3>
-          <p>Identificação e atração ativa de profissionais qualificados para posições estratégicas que exigem expertise específica de mercado.</p>
+          <p>Identificação e atração ativa de profissionais para posições estratégicas que exigem expertise específica.</p>
         </div>
         <div class="service-card">
           <div class="service-icon">
             <svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="#6c0647" stroke-width="2"><path d="M9 11l3 3L22 4"/><path d="M21 12v7a2 2 0 01-2 2H5a2 2 0 01-2-2V5a2 2 0 012-2h11"/></svg>
           </div>
           <h3>Assessment</h3>
-          <p>Avaliações comportamentais e técnicas que apoiam decisões de contratação e desenvolvimento com dados confiáveis.</p>
+          <p>Avaliações comportamentais e técnicas que apoiam decisões de contratação com dados confiáveis.</p>
         </div>
         <div class="service-card">
           <div class="service-icon">
             <svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="#6c0647" stroke-width="2"><path d="M2 3h6a4 4 0 014 4v14a3 3 0 00-3-3H2z"/><path d="M22 3h-6a4 4 0 00-4 4v14a3 3 0 013-3h7z"/></svg>
           </div>
           <h3>Consultoria de Processos</h3>
-          <p>Estruturação e otimização de processos seletivos internos, com metodologias modernas que reduzem tempo e aumentam assertividade.</p>
+          <p>Estruturação e otimização de seletivos com metodologias modernas para reduzir tempo e aumentar assertividade.</p>
         </div>
       </div>
     </div>
   </section>
 
-  <!-- ── DIFERENCIAIS ───────────────────────────────────────── -->
   <section class="differentials" id="diferenciais">
     <div class="container">
       <div class="diff-grid">
@@ -730,12 +713,72 @@
             </div>
           </div>
         </div>
-
       </div>
     </div>
   </section>
 
-  <!-- ── CONTATO ────────────────────────────────────────────── -->
+  <section class="partners" id="parcerias" style="padding: 96px 0; background: var(--color-bg-card);">
+    <div class="container">
+      <div style="max-width: 800px; margin: 0 auto;">
+        <div class="section-label">Parcerias que Transformam</div>
+        <h2 style="margin-bottom: 24px;">Nossos <span class="highlight">Clientes</span></h2>
+        <p style="font-size: 16px; color: var(--color-muted); line-height: 1.8; margin-bottom: 16px;">
+          Na RR Soluções em RH, acreditamos que a qualidade de nossa entrega se reflete na confiança de quem escolhe caminhar conosco. Atendemos organizações de diferentes portes e segmentos, desenhando soluções sob medida para conectar os talentos certos aos desafios de cada negócio.
+        </p>
+        <p style="font-size: 16px; color: var(--color-muted); line-height: 1.8; margin-bottom: 48px;">
+          Mais do que prestadores de serviços, nos posicionamos como parceiros estratégicos. É por isso que grandes instituições nos confiam a missão de estruturar seus processos seletivos, buscando nossa expertise para garantir contratações que unam rigor técnico, alinhamento institucional e um olhar humanizado.
+        </p>
+
+        <div style="background: var(--color-bg); border: 1px solid var(--color-border); border-radius: var(--radius-lg); padding: 40px;">
+          <div style="display: flex; align-items: center; gap: 24px; margin-bottom: 24px; flex-wrap: wrap;">
+            <img src="https://upload.wikimedia.org/wikipedia/commons/b/bc/Logo_da_Confedera%C3%A7%C3%A3o_Nacional_de_Agricultura.jpg?utm_source=pt.wikipedia.org&utm_campaign=index&utm_content=original" alt="Logo Instituto CNA" style="max-height: 64px; width: auto; object-fit: contain; border-radius: var(--radius);" />
+            <div>
+              <h3 style="font-size: 18px; font-weight: 700; color: var(--color-primary); margin-bottom: 4px;">Destaque de Sucesso: Instituto CNA</h3>
+              <p style="font-size: 13px; color: var(--color-muted); font-weight: 600;">Confederação da Agricultura e Pecuária do Brasil</p>
+            </div>
+          </div>
+
+          <p style="font-size: 15px; color: var(--color-muted); line-height: 1.7; margin-bottom: 16px;">
+            Entre as parcerias que consolidam a nossa atuação no mercado, destaca-se o trabalho realizado para o ICNA.
+          </p>
+          <p style="font-size: 15px; color: var(--color-muted); line-height: 1.7; margin-bottom: 24px;">
+            Sendo uma entidade de extrema relevância no cenário nacional — voltada para o desenvolvimento de estudos, pesquisas e inovação tecnológica no setor agropecuário —, o Instituto CNA exige profissionais com alto nível de especialização, visão analítica e forte aderência aos valores institucionais do Sistema CNA/SENAR.
+          </p>
+          <p style="font-size: 15px; font-weight: 600; color: var(--color-fg); margin-bottom: 16px;">
+            Para atender a essa demanda complexa, a RR Soluções em RH desenvolveu um modelo de recrutamento altamente estratégico:
+          </p>
+
+          <div style="display: flex; flex-direction: column; gap: 16px;">
+            <div style="display: flex; align-items: flex-start; gap: 12px;">
+              <div style="width: 24px; height: 24px; border-radius: 6px; background: rgba(108,6,71,.1); display: grid; place-items: center; flex-shrink: 0; color: var(--color-primary); margin-top: 2px;">
+                <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="3"><path d="M20 6L9 17l-5-5"/></svg>
+              </div>
+              <div>
+                <h4 style="font-size: 15px; font-weight: 600; margin-bottom: 2px;">Processos Blindados e Estruturados</h4>
+                <p style="font-size: 14px; color: var(--color-muted); line-height: 1.6;">Aplicação de metodologias validadas para garantir a meritocracia, a transparência e a escolha técnica mais assertiva.</p>
+              </div>
+            </div>
+            <div style="display: flex; align-items: flex-start; gap: 12px;">
+              <div style="width: 24px; height: 24px; border-radius: 6px; background: rgba(108,6,71,.1); display: grid; place-items: center; flex-shrink: 0; color: var(--color-primary); margin-top: 2px;">
+                <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="3"><path d="M20 6L9 17l-5-5"/></svg>
+              </div>
+              <div>
+                <h4 style="font-size: 15px; font-weight: 600; margin-bottom: 2px;">Experiência Humanizada</h4>
+                <p style="font-size: 14px; color: var(--color-muted); line-height: 1.6;">Condução de processos que respeitam a trajetória dos candidatos, fortalecendo a imagem do Instituto CNA como uma marca empregadora de excelência.</p>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <div style="background: var(--color-bg-card);">
+    <div class="container">
+      <hr class="section-divider" />
+    </div>
+  </div>
+
   <section class="contact" id="contato">
     <div class="container">
       <div class="contact-head">
@@ -770,7 +813,6 @@
     </div>
   </section>
 
-  <!-- ── FOOTER ─────────────────────────────────────────────── -->
   <footer>
     <div class="container">
       <div class="footer-inner">
@@ -801,8 +843,6 @@
       </div>
     </div>
   </footer>
-
-
 
 </body>
 </html>
